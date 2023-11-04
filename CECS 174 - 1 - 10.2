@@ -1,0 +1,30 @@
+import math
+
+print(3 == 3.0)
+print(3 == '3')
+print(33 != '33')
+#print(3 < '3')
+print(3 < 3.0)
+
+d1 = 1.11 - 1.10
+d2 = 2.11 - 2.10
+eps = 0.001
+
+if d1 == d2:
+    print("same")
+    
+dif = d1 - d2
+dif = math.fabs(dif)
+
+if (dif <= 0.001):
+    print("same")
+
+a = 5
+b = 6
+c = 7
+
+if a == b and a == c:
+    print("same")
+
+if a == b or a == c:
+    print("one is same")
