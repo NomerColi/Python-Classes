@@ -1,8 +1,27 @@
 patternSelectionRange = ['A', 'B', 'C', 'Q']
 space = ' '
 patternNum = 5
-maxSize = 50
+msgReturnToMenu = "Returned to main menu"
 
+# Printing string with space
+def SpacedPrint(s, j):
+    s = s.replace('ñ', str(j + 1))
+    print(s, end=' ')
+
+# Symbol Input
+inputMsgSymbol = "Enter a symbol, if you want to use numbers, enter 'numbers': "
+errMsgSymbol = "Wrong input"
+def GetSymbolInput(inputMsg, errMsg):
+    while True:
+        s = input(inputMsg)
+        if len(s) == 1:
+            return s
+        elif s == "numbers":
+            return 'ñ'
+        else:
+            print(errMsg)
+
+# Pattern Selection
 inputMsgPatternSelection = '''
 A- To print a rectangle
 B- To print Pyramid pattern
@@ -11,7 +30,6 @@ C- To print Diamond Pattern
 Q- To quit.
 '''
 errMsgPatternSelection = "Wrong input"
-
 def GetPatternSelectionInput(inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -21,10 +39,20 @@ def GetPatternSelectionInput(inputMsg, errMsg):
         else:
             print(errMsg)
 
+# Shape Input
+def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
+    while True:
+        s = input(inputMsg)
+        if s.isdigit() and 0 <= int(s) <= shapeNum:
+            return int(s)
+        else:
+            print(errMsg)
+
+## Rectangle
+# Rectangle Dimension Input
 rectDimensionLimit = 10
 inputMsgRectDimension = "Enter dimensions of rectangle. (x, y): "
 errMsgRectDimension = "Wrong input"
-
 def GetRectDimensionInput(inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -42,20 +70,7 @@ def GetRectDimensionInput(inputMsg, errMsg):
 
         print(errMsg)
 
-# Symbol
-inputMsgSymbol = "Enter a symbol, if you want to use numbers, enter 'numbers': "
-errMsgSymbol = "Wrong input"
-
-def GetSymbolInput(inputMsg, errMsg):
-    while True:
-        s = input(inputMsg)
-        if len(s) == 1:
-            return s
-        elif s == "numbers":
-            return 'ñ'
-        else:
-            print(errMsg)
-
+# Rectangle Shape Input
 rectShapeNum = 2
 inputMsgRectShape = '''
 1- Hollow Rectangle
@@ -64,22 +79,7 @@ inputMsgRectShape = '''
 '''
 errMsgRectShape = "Wrong input"
 
-def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
-    while True:
-        s = input(inputMsg)
-        if s.isdigit() and 0 <= int(s) <= shapeNum:
-            return int(s)
-        else:
-            print(errMsg)
-
-msgReturnToMenu = "Returned to main menu"
-
-def SpacedPrint(s, j):
-    s = s.replace('ñ', str(j + 1))
-    # if s == 'ñ':
-    #     s = str(j + 1)
-    print(s, end=' ')
-
+# Rectangle Draw Functions
 def DrawHollowRectangle(dim, symbol):
     print(f"\nYour hollow rectangle with dimensions: ({dim[0]}, {dim[1]}) and symbol '{symbol}'")
 
@@ -99,12 +99,11 @@ def DrawSolidRectangle(dim, symbol):
             SpacedPrint(symbol)
         print()
 
-# Pyramid
-
+## Pyramid
+# Pyramid Height Input
 pyramidHeightLimit = 10
 inputMsgHeight = "Enter height: "
 errMsgHeight = "Wrong height input"
-
 def GetHeightInput(limit, inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -114,6 +113,7 @@ def GetHeightInput(limit, inputMsg, errMsg):
         else:
             print(errMsg)
 
+# Pyramid Shape Input
 pyramidShapeNum = 2
 inputMsgPyramidShape = '''
 1- Half Pyramid
@@ -122,6 +122,7 @@ inputMsgPyramidShape = '''
 '''
 errMsgPyramidShape = "Wrong input"
 
+# Half Pyramid Shape Input
 halfPyramidShapeNum = 3
 inputMsgHalfPyramidShape = '''
 1- Half Pyramid
@@ -131,6 +132,7 @@ inputMsgHalfPyramidShape = '''
 '''
 errMsgHalfPyramidShape = "Wrong input"
 
+# Half Pyramid Draw Functions
 def DrawHalfPyramid(height, symbol):
     print(f"\nYour half pyramid with height: {height} and symbol '{symbol}'")
 
@@ -162,6 +164,7 @@ def DrawHollowInvertedHalfPyramid(height, symbol):
                 SpacedPrint(space, j)
         print()
 
+# Full Pyramid Shape Input
 fullPyramidShapeNum = 3
 inputMsgFullPyramidShape = '''
 1- Full Pyramid
@@ -171,18 +174,9 @@ inputMsgFullPyramidShape = '''
 '''
 errMsgFullPyramidShape = "Wrong input"
 
-def Drawd(n):
-    for i in range(n):
-        for j in range(n):
-            print('*', end=' ')
-        print()
-
-def DrawTriangle(n):
-    for i in range(n):
-        for j in range(n):
-            if i < (j + 1):
-                print('*', end=' ')
-        print()
+# Full Pyramid Draw Functios
+def DrawFullPyramid(height, symbol):
+    print()
 
 # def HallowSomething(v, h):
 #     print(star * v)
@@ -249,6 +243,12 @@ while True:
 
         elif shape == 2:
             fullShape = GetShapeSelectionInput(fullPyramidShapeNum, inputMsgFullPyramidShape, errMsgFullPyramidShape)
+
+            if fullShape == 0:
+                print(msgReturnToMenu)
+                continue
+            elif fullShape == 1:
+                DrawFullPyramid(height, symbol)
             
 
 print("Thank you for your business")
