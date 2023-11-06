@@ -1,13 +1,8 @@
-patternSelectionRange = ['A', 'B', 'C', 'D']
+patternSelectionRange = ['a', 'b', 'c', 'q']
 space = ' '
-patternNum = 5
 returnMessage = 'Returned to main menu'
 
-#print string with space
-def SpacePrint(s, j = 0):
-    s = s.replace('ñ', str(j + 1))
-    print(s, end= ' ')
-
+#return a string replaced with numbers that come from index 'j'
 def GetSymbol(s, j):
     return s.replace('ñ', str(j + 1))
 
@@ -15,6 +10,7 @@ def GetSymbol(s, j):
 inputMsgSymbol = "Please enter a symbol. If you want to use numbers, enter 'numbers': "
 errMsgSymbol = "Wrong input. Please select a valid input."
 
+#get and return a symbol that is either one length or 'numbers'
 def GetSymbolInput(inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -36,15 +32,17 @@ Q- To quit.
 
 '''
 errMsgPatternSelection = "Wrong input"
+#get and return a char that is in range of 'patternSelectionRange'
 def GetPatternSelectionInput(inputMsg, errMsg):
     while True:
-        s = input(inputMsg)
+        s = input(inputMsg).lower()
         if s in patternSelectionRange:
             return s
         else:
             print(errMsg)
 
 #shape input
+#get and return an integer that is digit between 0 and 'shapeNum'
 def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -58,7 +56,7 @@ def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
 rectDimensionLimit = 10
 inputMsgRectDimension = "Enter dimensions of rectangle. (x, y): "
 errMsgRectDimension = "Wrong input"
-
+#get an 
 def GetRectDimensionInput(inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -86,13 +84,14 @@ inputMsgRectShape = '''
 errMsgRectShape = "Wrong Input"
 
 #rectangle draw functions
+#draw a hollow rectangle using dim and symbol
 def DrawHollowRectangle(dim, symbol):
     print(f"\n Your hollow rectangle with dimensions: ({dim[0]}, {dim[1]}) and symbol '{symbol}'")
 
     for i in range(dim[1]):
         for j in range(dim[0]):
             if i == 0 or i == dim[1] - 1 or j == 0 or j == dim[0] - 1:
-                print(GetSymbol(symbol, j), ' ')
+                print(GetSymbol(symbol, j), end=' ')
             else:
                 print(' ', end=' ')
         print()
@@ -102,8 +101,24 @@ def DrawSolidRectangle(dim, symbol):
 
     for i in range(dim[1]):
         for j in range(dim[0]):
-            print(GetSymbol(symbol, j), ' ')
+            print(GetSymbol(symbol, j), end=' ')
         print()
+
+#Rectangle draw process
+def RectangleProcess():
+    dimensions = GetRectDimensionInput(inputMsgRectDimension, errMsgRectDimension)
+    symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
+    shape = GetShapeSelectionInput(rectShapeNum, inputMsgRectShape, errMsgRectShape)
+
+    if shape == 0:
+        print(returnMessage)
+        return -1
+    if shape == 1:
+        DrawHollowRectangle(dimensions, symbol)
+    elif shape == 2:
+        DrawSolidRectangle(dimensions, symbol)
+
+    return 0
 
 ##Pyramid
 #Pyramid Height Input
@@ -211,6 +226,44 @@ def DrawHollowInvertedFullPyramid(height, symbol):
                 print(' ', end='')
         print()
 
+#Pyramid Process
+def PyramidProcess():
+    height = GetHeightInput(pyramidHeightLimit, inputMsgHeight, errMsgHeight)
+    symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
+    shape = GetShapeSelectionInput(pyramidShapeNum, inputMsgPyramidShape, errMsgPyramidShape)
+
+    if shape == 0:
+        print(returnMessage)
+        return -1
+    if shape == 1:
+        #let user choose which half pyramid pattern to print
+        halfShape = GetShapeSelectionInput(halfPyramidShapeNum, inputMsgHalfPyramidShape, errMsgHalfPyramidShape)
+
+        if halfShape == 0:
+            print(returnMessage)
+            return -1
+        elif halfShape == 1:
+            DrawHalfPyramid(height, symbol)
+        elif halfShape == 2:
+            DrawInvertedHalfPyramid(height, symbol)
+        elif halfShape == 3:
+            DrawHollowInvertedHalfPyramid(height, symbol)
+
+    elif shape == 2:
+        #let user choose which full pyramid pattern to print
+        fullShape = GetShapeSelectionInput(fullPyramidShapeNum, inputMsgFullPyramidShape, errMsgFullPyramidShape)
+
+        if fullShape == 0:
+            print(returnMessage)
+            return -1
+        elif fullShape == 1:
+            DrawFullPyramid(height, symbol)
+        elif fullShape == 2:
+            DrawInvertedFullPyramid(height, symbol)
+        elif fullShape == 3:
+            DrawHollowInvertedFullPyramid(height, symbol)
+    return 0
+
 ##Diamond
 #Diamond Height Input
 diamondHeightLimit = 10
@@ -274,71 +327,43 @@ def drawSolidHalfDiamond(height, symbol):
             print(GetSymbol(symbol, j), end="")
         print()
 
+#Diamond Process
+def DiamondProcess():
+    height = GetHeightInput(diamondHeightLimit, inputMsgHeight, errMsgHeight)
+    symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
+    shape = GetShapeSelectionInput(diamondShapeNum, inputMsgDiamondShape, errMsgDiamondShape)
+
+    if shape == 0:
+        print(returnMessage)
+        return -1
+    if shape == 1:
+        drawSolidDiamond(height, symbol)
+    elif shape == 2:
+        drawHollowDiamond(height, symbol)
+    elif shape == 3:
+        drawSolidHalfDiamond(height, symbol)
+    
+    return 0
+
+#main process
+
+def Process():
+    patternSelection = GetPatternSelectionInput(inputMsgPatternSelect, errMsgRectDimension)
+
+    if patternSelection == 'a':
+        return RectangleProcess()
+    elif patternSelection == 'b':
+        return PyramidProcess()
+    elif patternSelection == 'c':
+        return DiamondProcess()
+    elif patternSelection == 'q':
+        return -1
+
 ##Put it all together
 while True:
-    patternSelection = GetPatternSelectionInput(inputMsgPatternSelect, errMsgRectDimension)
-    #Rectangle
-    if patternSelection == 'A' or patternSelection == 'a':
-        dimensions = GetRectDimensionInput(inputMsgRectDimension, errMsgRectDimension)
-        symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
-        shape = GetShapeSelectionInput(rectShapeNum, inputMsgRectShape, errMsgRectShape)
-
-        if shape == 0:
-            print(returnMessage)
-            continue
-        if shape == 1:
-            DrawHollowRectangle(dimensions, symbol)
-        elif shape == 2:
-            DrawSolidRectangle(dimensions, symbol)
-
-    #Pyramid
-    elif patternSelection == 'B' or patternSelection == 'b':
-        height = GetHeightInput(pyramidHeightLimit, inputMsgHeight, errMsgHeight)
-        symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
-        shape = GetShapeSelectionInput(pyramidShapeNum, inputMsgPyramidShape, errMsgPyramidShape)
-
-        if shape == 0:
-            print(returnMessage)
-            continue
-        if shape == 1:
-            halfShape = GetShapeSelectionInput(halfPyramidShapeNum, inputMsgHalfPyramidShape, errMsgHalfPyramidShape)
-
-            if halfShape == 0:
-                print(returnMessage)
-                continue
-            elif halfShape == 1:
-                DrawHalfPyramid(height, symbol)
-            elif halfShape == 2:
-                DrawInvertedHalfPyramid(height, symbol)
-            elif halfShape == 3:
-                DrawHollowInvertedHalfPyramid(height, symbol)
-
-        elif shape == 2:
-            fullShape = GetShapeSelectionInput(fullPyramidShapeNum, inputMsgFullPyramidShape, errMsgFullPyramidShape)
-
-            if fullShape == 0:
-                print(returnMessage)
-                continue
-            elif fullShape == 1:
-                DrawFullPyramid(height, symbol)
-            elif fullShape == 2:
-                DrawInvertedFullPyramid(height, symbol)
-            elif fullShape == 3:
-                DrawHollowInvertedFullPyramid(height, symbol)
-    elif patternSelection == 'C' or patternSelection == 'c':
-        height = GetHeightInput(diamondHeightLimit, inputMsgHeight, errMsgHeight)
-        symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
-        shape = GetShapeSelectionInput(diamondShapeNum, inputMsgDiamondShape, errMsgDiamondShape)
-
-        if shape == 0:
-            print(returnMessage)
-            continue
-        if shape == 1:
-            drawSolidDiamond(height, symbol)
-        elif shape == 2:
-            drawHollowDiamond(height, symbol)
-        elif shape == 3:
-            drawSolidHalfDiamond(height, symbol)
+    result = Process()
+    if result == -1:
+        break
 
 print("Thank you for your business")
 
