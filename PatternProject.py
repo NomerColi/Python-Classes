@@ -2,6 +2,8 @@ patternSelectionRange = ['a', 'b', 'c', 'q']
 returnMessage = 'Returned to main menu'
 
 #return a string replaced with numbers that come from index 'j'
+# s is a symbol that the user entered
+# j is an index for priting numbers as a symbol
 def GetSymbol(s, j):
     return s.replace('ñ', str(j + 1))
 
@@ -16,6 +18,7 @@ def GetSymbolInput(inputMsg, errMsg):
         if len(s) == 1:
             return s
         elif s == "numbers":
+            #'ñ' is a symbol for using numbers, user cannot enter this symbol using a keyboard
             return 'ñ'
         else:
             print(errMsg)
@@ -42,6 +45,7 @@ def GetPatternSelectionInput(inputMsg, errMsg):
 
 #shape input
 #get and return an integer that is digit between 0 and 'shapeNum'
+#shapeNum is a number of shapes that the selected pattern has
 def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -82,8 +86,8 @@ inputMsgRectShape = '''
 
 errMsgRectShape = "Wrong Input"
 
-#rectangle draw functions
-#draw a hollow rectangle using dim and symbol
+#draw hollow rectangle with given dim and given symbol
+#dim is a list consisted of x and y value
 def DrawHollowRectangle(dim, symbol):
     print(f"\n Your hollow rectangle with dimensions: ({dim[0]}, {dim[1]}) and symbol '{symbol}'")
 
@@ -95,6 +99,8 @@ def DrawHollowRectangle(dim, symbol):
                 print(' ', end=' ')
         print()
 
+#draw solid rectangle with given dim and given symbol
+#dim is a list consisted of x and y value
 def DrawSolidRectangle(dim, symbol):
     print(f"\n Your solid rectangle with dimensions: ({dim[0]}, {dim[1]}) and symbol '{symbol}'")
 
@@ -104,6 +110,8 @@ def DrawSolidRectangle(dim, symbol):
         print()
 
 #Rectangle draw process
+#get height, symbol, and shape input and draw a rectangle
+#return an integer for deciding whether the user wants to quit or not
 def RectangleProcess():
     dimensions = GetRectDimensionInput(inputMsgRectDimension, errMsgRectDimension)
     symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
@@ -125,6 +133,7 @@ pyramidHeightLimit = 10
 inputMsgHeight = "Enter height: "
 errMsgHeight = "Wrong height input"
 
+#return an integer for height that is less than given limit
 def GetHeightInput(limit, inputMsg, errMsg):
     while True:
         s = input(inputMsg)
@@ -153,7 +162,7 @@ inputMsgHalfPyramidShape = '''
 '''
 errMsgHalfPyramidShape = "Wrong input"
 
-# Half Pyramid Draw Functions
+#draw half pyramid with given height and given symbol
 def DrawHalfPyramid(height, symbol):
     print(f"\nYour half pyramid with height: {height} and symbol '{symbol}'")
 
@@ -162,6 +171,7 @@ def DrawHalfPyramid(height, symbol):
             print(GetSymbol(symbol, j), end='') 
         print()
 
+#draw inverted half pyramid with given height and given symbol
 def DrawInvertedHalfPyramid(height, symbol):
     print(f"\nYour inverted half pyramid with height: {height} and symbol '{symbol}'")
 
@@ -170,6 +180,7 @@ def DrawInvertedHalfPyramid(height, symbol):
             print(GetSymbol(symbol, j), end='') 
         print()
 
+#draw hollow inverted half pyramid with given height and given symbol
 def DrawHollowInvertedHalfPyramid(height, symbol):
     print(f"\nYour hollow inverted half pyramid with height: {height} and symbol '{symbol}'")
 
@@ -192,6 +203,7 @@ inputMsgFullPyramidShape = '''
 '''
 errMsgFullPyramidShape = "Wrong input"
 
+#draw full pyramid with given height and given symbol
 def DrawFullPyramid(height, symbol):
     print(f"\nYour full pyramid with height: {height} and symbol '{symbol}'")
 
@@ -205,6 +217,7 @@ def DrawFullPyramid(height, symbol):
         h = 0
         print()
 
+#draw inverted full pyramid with given height and given symbol
 def DrawInvertedFullPyramid(height, symbol):
     print(f"\nYour inverted full pyramid with height: {height} and symbol '{symbol}'")
     for i in range(height, 0, -1):
@@ -214,6 +227,7 @@ def DrawInvertedFullPyramid(height, symbol):
             print(GetSymbol(symbol, j), end=' ') 
         print()
 
+#draw hollow inverted full pyramid with given height and given symbol
 def DrawHollowInvertedFullPyramid(height, symbol):
     print(f"\nYour hollow inverted full pyramid with height: {height} and symbol '{symbol}'")
     for i in range(1, height + 1):
@@ -225,6 +239,8 @@ def DrawHollowInvertedFullPyramid(height, symbol):
         print()
 
 #Pyramid Process
+#get height, symbol, and shape input and draw a pyramid
+#return an integer for deciding whether the user wants to quit or not
 def PyramidProcess():
     height = GetHeightInput(pyramidHeightLimit, inputMsgHeight, errMsgHeight)
     symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
@@ -265,16 +281,8 @@ def PyramidProcess():
 ##Diamond
 #Diamond Height Input
 diamondHeightLimit = 10
-inputMsgDiamondHeight = "Enter diamond height: "
+inputMsgDiamondHeight = "Enter diamond height(less than 10): "
 errMsgHeight = "Wrong height input"
-
-def GetDiamondHeightInput(limit, inputMsg, errMsg):
-    while True:
-        s = input(inputMsg)
-        if s.isnumeric() and int(s) < limit:
-            return int(s)
-        else:
-            print(errMsg)
 
 #Diamond Shape Input
 diamondShapeNum = 3
@@ -286,6 +294,7 @@ inputMsgDiamondShape = '''
 '''
 errMsgDiamondShape = "Wrong input"
 
+#draw solid diamond with given height and given symbol
 def DrawSolidDiamond(height, symbol):
     print(f"\nYour solid diamond with height: {height} and symbol '{symbol}'")
     for i in range(height):
@@ -293,6 +302,7 @@ def DrawSolidDiamond(height, symbol):
     for i in range(height - 2, -1, -1):
         print(' '*(height - i), GetSymbol(symbol, i)*(i*2+1))
 
+#draw solid hollow diamond with given height and given symbol
 def DrawHollowDiamond(height, symbol):
     print(f"\nYour hollow diamond with height: {height} and symbol '{symbol}'")
     for i in range(height + 1):
@@ -314,6 +324,7 @@ def DrawHollowDiamond(height, symbol):
                 print(' ', end="")
         print()
 
+#draw solid half diamond with given height and given symbol
 def DrawSolidHalfDiamond(height, symbol):
     print(f"\nYour solid half diamond with height: {height} and symbol '{symbol}'")
     for i in range(height):
@@ -326,6 +337,8 @@ def DrawSolidHalfDiamond(height, symbol):
         print()
 
 #Diamond Process
+#get height, symbol, and shape input and draw a diamond
+#return an integer for deciding whether the user wants to quit or not
 def DiamondProcess():
     height = GetHeightInput(diamondHeightLimit, inputMsgHeight, errMsgHeight)
     symbol = GetSymbolInput(inputMsgSymbol, errMsgSymbol)
@@ -344,7 +357,8 @@ def DiamondProcess():
     return 0
 
 #main process
-
+#get an input for choosing which pattern to print and process
+#return an integer for deciding whether the user wants to quit or not
 def Process():
     patternSelection = GetPatternSelectionInput(inputMsgPatternSelect, errMsgRectDimension)
 
@@ -357,9 +371,11 @@ def Process():
     elif patternSelection == 'q':
         return -1
 
-##Put it all together
+#main code
 while True:
+    #process the painting and saves the result value
     result = Process()
+    #result is -1 when the user inputs 'q' to quit
     if result == -1:
         break
 
