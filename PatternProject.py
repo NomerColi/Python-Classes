@@ -113,7 +113,7 @@ def RectangleProcess():
     if shape == 0:
         print(returnMessage)
         return -1
-    if shape == 1:
+    elif shape == 1:
         DrawHollowRectangle(dimensions, symbol)
     elif shape == 2:
         DrawSolidRectangle(dimensions, symbol)
@@ -130,7 +130,7 @@ def GetHeightInput(limit, inputMsg, errMsg):
     while True:
         s = input(inputMsg)
         #check if input is integer
-        if s.isnumeric() and int(s) < limit:
+        if s.isnumeric() and 0 < int(s) < limit:
             return int(s)
         else:
             print(errMsg)
@@ -288,14 +288,14 @@ inputMsgDiamondShape = '''
 '''
 errMsgDiamondShape = "Wrong input"
 
-def drawSolidDiamond(height, symbol):
+def DrawSolidDiamond(height, symbol):
     print(f"\nYour solid diamond with height: {height} and symbol '{symbol}'")
     for i in range(height):
         print(' '*(height - i), GetSymbol(symbol, i)*(i*2+1))
     for i in range(height - 2, -1, -1):
         print(' '*(height - i), GetSymbol(symbol, i)*(i*2+1))
 
-def drawHollowDiamond(height, symbol):
+def DrawHollowDiamond(height, symbol):
     print(f"\nYour hollow diamond with height: {height} and symbol '{symbol}'")
     for i in range(height + 1):
         for j in range(height - i + 1):
@@ -316,7 +316,7 @@ def drawHollowDiamond(height, symbol):
                 print(space, end="")
         print()
 
-def drawSolidHalfDiamond(height, symbol):
+def DrawSolidHalfDiamond(height, symbol):
     print(f"\nYour solid half diamond with height: {height} and symbol '{symbol}'")
     for i in range(height):
         for j in range(i + 1):
@@ -337,11 +337,11 @@ def DiamondProcess():
         print(returnMessage)
         return -1
     if shape == 1:
-        drawSolidDiamond(height, symbol)
+        DrawSolidDiamond(height, symbol)
     elif shape == 2:
-        drawHollowDiamond(height, symbol)
+        DrawHollowDiamond(height, symbol)
     elif shape == 3:
-        drawSolidHalfDiamond(height, symbol)
+        DrawSolidHalfDiamond(height, symbol)
     
     return 0
 
