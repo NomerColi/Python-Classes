@@ -1,5 +1,4 @@
 patternSelectionRange = ['a', 'b', 'c', 'q']
-space = ' '
 returnMessage = 'Returned to main menu'
 
 #return a string replaced with numbers that come from index 'j'
@@ -174,7 +173,6 @@ def DrawInvertedHalfPyramid(height, symbol):
 def DrawHollowInvertedHalfPyramid(height, symbol):
     print(f"\nYour hollow inverted half pyramid with height: {height} and symbol '{symbol}'")
 
-    #SpacedPrint((symbol + space) * height, 0)
     print()
     for i in range(height):
         for j in range(height):
@@ -304,7 +302,7 @@ def DrawHollowDiamond(height, symbol):
             if j == 1 or j == 2*i-1:
                 print(GetSymbol(symbol, j), end="")
             else:
-                print(space, end="")
+                print(' ', end="")
         print()
     for i in range(height - 1, 0, -1):
         for j in range(height - i + 1):
@@ -313,7 +311,7 @@ def DrawHollowDiamond(height, symbol):
             if j == 1 or j == 2*i-1:
                 print(GetSymbol(symbol, j), end="")
             else:
-                print(space, end="")
+                print(' ', end="")
         print()
 
 def DrawSolidHalfDiamond(height, symbol):
