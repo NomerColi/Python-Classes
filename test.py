@@ -1,22 +1,38 @@
-for i in range(0, 5):
-    for j in range(0, i):
-        print(i)
+def find_upstream(dna_sequence):
+    idx = dna_sequence.find("ATG")
+    return dna_sequence[0:idx]
 
-x = 0
-i = 1
-while x < 5:
-    x += 1
-print(x)
+def find_gene(dna_sequence):
+    idx = dna_sequence.find("ATG")
+    return dna_sequence[idx:]
 
-tc = 100
-tf = (9//5) * tc + 32
-print(tf)
+def second_codon(gene_sequence):
+    idx = gene_sequence.find("ATG")
+    return gene_sequence[idx + 3, idx + 6]
 
-l = ["ASD", "FGH", "JKL"]
-for i in l:
-    print(i)
+def third_codon(gene_sequence):
+    idx = gene_sequence.find("ATG")
+    return gene_sequence[idx + 6, idx + 9]
 
-for i in range(len(l)):
-    print(l[i])
+def complementary_nucleotide(nucleotide):
+    match nucleotide:
+        case 'A':
+            return 'T'
+        case 'T':
+            return 'A'
+        case 'G':
+            return 'C'
+        case 'C':
+            return 'G'
 
-print(1 or "DASADADDS")
+def complemantary_sequence(dna_sequence):
+    s = ""
+    for i in dna_sequence:
+        s += complementary_nucleotide(i)
+
+if __name__ == "__main__":
+    s = input("Please enter a DNA genetic sequence: ")
+    print(f"\nOriginal sequence: {s}")
+
+    print(f"\nATG codon at bp 10")
+    print(f"\tfollowed by {second_codon}")
