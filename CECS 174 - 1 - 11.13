@@ -1,0 +1,30 @@
+class Car:
+    def __init__(self, model=None,color=None, year=None):
+        self.model = model if model != None else "asd"
+        self.color = color if color != None else "empty"
+        self.year = year if year != None else 0
+    def SetColor(self, color):
+        self.color = color
+    def GetColor(self):
+        return self.color
+    
+car1 = Car()
+print(car1.model)
+car1.model = "Hyundai"
+car1.color = "Yed"
+car1.year = 2000
+
+car2 = Car("HHH", "B", 123)
+
+
+class Monster:
+    def __init__(self, name, atk, health, rank):
+        self.name = name
+        self.atk = atk
+        self.health = health
+        self.rank = rank
+    
+    def GetHit(self, dmg):
+        self.health -= dmg
+
+m1 = Monster("Rock", 10, 5, 2)
