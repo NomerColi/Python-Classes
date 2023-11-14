@@ -3,7 +3,7 @@ returnMessage = 'Returned to main menu'
 
 #return a string replaced with numbers that come from index 'j'
 # s is a symbol that the user entered
-# j is an index for priting numbers as a symbol
+# j is an index for printing numbers as a symbol
 def GetSymbol(s, j):
     return s.replace('ñ', str(j + 1))
 
@@ -212,7 +212,7 @@ def DrawFullPyramid(height, symbol):
         for j in range(1, (height-i)+1):
             print(end=' ')
         while h != (2*i-1):
-            print(GetSymbol(symbol, j), end='') 
+            print(GetSymbol(symbol, h if (h < i) else i*2 - h - 2), end='')
             h += 1
         h = 0
         print()
@@ -223,8 +223,8 @@ def DrawInvertedFullPyramid(height, symbol):
     for i in range(height, 0, -1):
         for j in range(0, height - i):
             print(end= ' ')
-        for j in range(0, i):
-            print(GetSymbol(symbol, j), end=' ') 
+        for j in range(0, i*2 - 1):
+            print(GetSymbol(symbol, j if (j < i) else i*2 - j - 2), end='')
         print()
 
 #draw hollow inverted full pyramid with given height and given symbol
@@ -233,7 +233,10 @@ def DrawHollowInvertedFullPyramid(height, symbol):
     for i in range(1, height + 1):
         for j in range(1, 2*height):
             if i == 1 or i == j or i + j == 2*height:
-                print(GetSymbol(symbol, j), end='') 
+                idx = 0
+                if i == 1:
+                    idx = j - 1 if (j <= height) else height*2 - j - 1
+                print(GetSymbol(symbol, idx), end='')
             else:
                 print(' ', end='')
         print()
