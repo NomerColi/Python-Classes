@@ -56,7 +56,7 @@ def GetShapeSelectionInput(shapeNum, inputMsg, errMsg):
 
 #rectangle
 #rectangle dimension input
-rectDimensionLimit = 10
+rectDimensionLimit = 30
 inputMsgRectDimension = "Enter dimensions of rectangle. (x, y): "
 errMsgRectDimension = "Wrong input"
 #get an 
@@ -283,7 +283,7 @@ def PyramidProcess():
 
 ##Diamond
 #Diamond Height Input
-diamondHeightLimit = 10
+diamondHeightLimit = 20
 inputMsgDiamondHeight = "Enter diamond height(less than 10): "
 errMsgHeight = "Wrong height input"
 
