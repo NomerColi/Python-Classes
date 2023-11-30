@@ -4,6 +4,9 @@ import math
 
 vowels = "aeiou"
 
+def Contains(s, c):
+    return s.lower().find(c.lower()) != -1
+
 def Sort(s):
     return str(''.join(sorted(s)))
 
@@ -32,7 +35,7 @@ def Get_First_Name(s):
     return firstName
 
 def Is_Vowel(c):
-    return vowels.find(c.lower()) != -1
+    return Contains(vowels, c)
 
 def Get_Vowel_Num(s):
     num = 0
@@ -84,6 +87,8 @@ print(f"\n{splitName}")
 
 
 ## Part 2
+ascii_a = 97
+ascii_z = 122
 
 # A
 def Get_Mirrored(s):
@@ -99,7 +104,7 @@ def Char_Num(s, char):
     numOfChar = 0
     for c in s:
         lowerC = c.lower()
-        if 97 <= ord(lowerC) <= 122:
+        if ascii_a <= ord(lowerC) <= ascii_z:
             numOfAlphabet += 1
             if lowerC == char:
                 numOfChar += 1
@@ -107,20 +112,43 @@ def Char_Num(s, char):
     charRate = numOfChar / numOfAlphabet * 100
     print(f"Your text contains {numOfAlphabet} alphabetic characters, of which {numOfChar}({charRate:.1f}%) are \'{c}\'.")
 
-# E, F
-def No_Char(s, char):
-    return s.lower().find(char) == -1
-
-# G
+# E, F, G
 def No_Char_Extended(s, char):
     wordList = s.split()
-    wordList = [w for w in wordList if No_Char(w, char)]
+    wordList = [w for w in wordList if w.lower().find(char) == -1]
     print(" ".join(wordList))
 
     numOfWords = Get_Word_Num(s)
     noCharRate = len(wordList) / numOfWords * 100
     print(f"Your text contains {numOfWords} words, of which {len(wordList)}({noCharRate:.1f}%) are \'{char}\'.")
     pass
+
+# H
+def Avoids(w, s):
+    for c in s:
+        if Contains(w, c):
+            return False
+        
+    return True
+
+# I
+def Uses_Only(w, s):
+    for c in w:
+        if not Contains(s, c):
+            return False
+    return True
+
+# J
+def Uses_All(w, s):
+    for c in s:
+        if not Contains(w, c):
+            return False
+        
+    return True
+
+# K
+def Is_Abecedarian(s):
+    return Is_Sorted(s)
 
 def Find(s: str, c: chr, i: int):
     idx = s[i:].find(c)
@@ -169,5 +197,10 @@ print(removed)
 
 Char_Num(text, 'e')
 
-print(No_Char(text, 'z'))
 print(No_Char_Extended(text, 'a'))
+
+word = input("Enter a word to test Avoids function: ")
+avoidStr = input("Enter a string of forbidden letters: ")
+bAvoid = Avoids(word, avoidStr)
+print(f"{word} avoids {avoidStr}, {bAvoid}")
+
