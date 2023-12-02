@@ -1,22 +1,27 @@
-import math
-
 ## Part 1
 
 vowels = "aeiou"
 
-def Contains(s, c):
-    return s.lower().find(c.lower()) != -1
+def contains(text, char):
+    return text.lower().find(char.lower()) != -1
 
-def Sort(s):
-    return str(''.join(sorted(s)))
+def sort(text):
+    return str(''.join(sorted(text)))
 
-def Remove_Char(s, i):
-    s = s[:i] + s[i + 1:]
+def remove_char_idx(text, i):
+    return text[:i] + text[i + 1:]
 
-def Get_Word_Num(s):
-    bInSpace = s[0] == ' '
+def remove_char(text, char, startIdx):
+    i = find(text, char, startIdx)
+    if i != -1:
+        return remove_char_idx(text, i)
+    else:
+        return text
+
+def get_word_num(text):
+    bInSpace = text[0] == ' '
     num = 0 if bInSpace else 1
-    for c in s:
+    for c in text:
         if bInSpace and c != ' ':
             num += 1
             bInSpace = False
@@ -25,34 +30,34 @@ def Get_Word_Num(s):
 
     return num
 
-def Get_First_Name(s):
+def get_first_name(text):
     firstName = ""
-    for c in s:
+    for c in text:
         if c != ' ':
             firstName += c
         else:
             break
     return firstName
 
-def Is_Vowel(c):
-    return Contains(vowels, c)
+def is_vowel(char):
+    return contains(vowels, char)
 
-def Get_Vowel_Num(s):
+def get_vowel_num(text):
     num = 0
-    for c in s:
-        if Is_Vowel(c):
+    for c in text:
+        if is_vowel(c):
             num += 1
 
     return num
 
-def Get_Vowel_Capitialized_Name(s):
-    name = ""
-    for c in s:
-        if Is_Vowel(c):
-            name += c.upper()
+def get_vowel_capitialized_name(text):
+    capitalizedName = ""
+    for c in text:
+        if is_vowel(c):
+            capitalizedName += c.upper()
         else:
-            name += c.lower()
-    return name
+            capitalizedName += c.lower()
+    return capitalizedName
 
 #name = input("Please enter your name: ")
 name = "John Jacob Jingleheimer Schmidt"
@@ -66,22 +71,22 @@ print(f"\nThe last character is: {lastChar}")
 firstEIndex = name.lower().find('e')
 print(f"\nThe first \'e\' is at position {firstEIndex}.")
 
-numOfWords = Get_Word_Num(name)
+numOfWords = get_word_num(name)
 print(f"\nYour name has {numOfWords} words.")
 
-firstName = Get_First_Name(name)
+firstName = get_first_name(name)
 print(f"\nYour first name is {firstName}.")
 
-numOfVowels = Get_Vowel_Num(name)
+numOfVowels = get_vowel_num(name)
 print(f"\nYour name contains {numOfVowels} vowels.")
 
-vowel_capitalized_name = Get_Vowel_Capitialized_Name(name)
+vowel_capitalized_name = get_vowel_capitialized_name(name)
 print(f"\nYour name with uppercase vowels is: {vowel_capitalized_name}")
 
 centeredName = '+' * 10 + '~' * 10 + name + '~' * 10 + '+' * 10
 print(f"\n{centeredName}")
 
-midIdx = math.floor(length / 2)
+midIdx = length // 2
 splitName = name[:midIdx] + '*' * (70 - length) + name[midIdx:]
 print(f"\n{splitName}")
 
@@ -90,19 +95,21 @@ print(f"\n{splitName}")
 ascii_a = 97
 ascii_z = 122
 
+forbidden_letter_num = 5
+
 # A
-def Get_Mirrored(s):
-    return s + s[::-1]
+def get_mirrored(text):
+    return text + text[::-1]
 
 # B
-def Remove_Char_From_String(s, c):
-    return s.replace(c, '')
+def remove_char_from_string(text, char):
+    return text.replace(char, '')
 
 # C, D
-def Char_Num(s, char):
+def char_num(text, char):
     numOfAlphabet = 0
     numOfChar = 0
-    for c in s:
+    for c in text:
         lowerC = c.lower()
         if ascii_a <= ord(lowerC) <= ascii_z:
             numOfAlphabet += 1
@@ -110,60 +117,100 @@ def Char_Num(s, char):
                 numOfChar += 1
 
     charRate = numOfChar / numOfAlphabet * 100
-    print(f"Your text contains {numOfAlphabet} alphabetic characters, of which {numOfChar}({charRate:.1f}%) are \'{c}\'.")
+    print(f"\nYour text contains {numOfAlphabet} alphabetic characters, of which {numOfChar}({charRate:.1f}%) are \'{char}\'.")
 
 # E, F, G
-def No_Char_Extended(s, char):
-    wordList = s.split()
+def no_char(text, char):
+    wordList = text.split()
     wordList = [w for w in wordList if w.lower().find(char) == -1]
-    print(" ".join(wordList))
+    textWithoutChar = " ".join(wordList)
+    print(f"\nA text without words that contain {char} is \"{textWithoutChar}\"")
 
-    numOfWords = Get_Word_Num(s)
+    numOfWords = get_word_num(text)
     noCharRate = len(wordList) / numOfWords * 100
     print(f"Your text contains {numOfWords} words, of which {len(wordList)}({noCharRate:.1f}%) are \'{char}\'.")
-    pass
 
 # H
-def Avoids(w, s):
-    for c in s:
-        if Contains(w, c):
+def avoids(word, avoidLetters):
+    for c in avoidLetters:
+        if contains(word, c): # w.contains(c)
             return False
         
     return True
 
+# H extended
+def find_least_forbidden_letters(text, avoidLetters):
+    if len(avoidLetters) <= forbidden_letter_num:
+        return avoidLetters
+    
+    words = text.split()
+    counts = [0] * len(avoidLetters)
+    for i in range(len(avoidLetters)):
+        for word in words:
+            if not avoids(word, avoidLetters[i]):
+                counts[i] += 1
+    
+    sortedCounts = list(counts)
+    sortedCounts.sort()
+
+    least_forbidden_letters = []
+    lastIdx = -1
+    lastCount = -1
+    for count in sortedCounts:
+        
+        idx = 0
+        if lastCount == count:
+            idx = counts[lastIdx + 1:].index(count) + lastIdx + 1
+        else:
+            idx = counts.index(count)
+
+        least_forbidden_letters.append(avoidLetters[idx])
+
+        lastIdx = idx
+        lastCount = count
+
+        if len(least_forbidden_letters) == forbidden_letter_num:
+            break
+
+    return least_forbidden_letters
+
 # I
-def Uses_Only(w, s):
-    for c in w:
-        if not Contains(s, c):
+def uses_only(word, letters):
+    for c in word:
+        if not contains(letters, c):
             return False
     return True
 
 # J
-def Uses_All(w, s):
-    for c in s:
-        if not Contains(w, c):
+def uses_all(word, letters):
+    for c in letters:
+        if not contains(word, c):
             return False
         
     return True
 
 # K
-def Is_Abecedarian(s):
-    return Is_Sorted(s)
+def is_abecedarian(text):
+    return is_sorted(text)
 
-def Find(s: str, c: chr, i: int):
-    idx = s[i:].find(c)
+# L
+def find(text: str, char: chr, i: int):
+    idx = text[i:].find(char)
     if idx != -1:
         idx += i
     return idx
 
-def Is_Sorted(s):
-    return s == Sort(s)
+# M
+def is_sorted(text):
+    return text == sort(text)
 
-def Is_Anagram(s1, s2):
-    return Sort(s1) == Sort(s2)
+# O
+def is_anagram(text1, text2):
+    return sort(text1) == sort(text2)
 
-def Has_Duplicates(s):
-    sortedS = Sort(s)
+# P
+def has_duplicates(text):
+    sortedS = sort(text)
     c = ''
     for i in sortedS:
         if c == i:
@@ -172,35 +219,93 @@ def Has_Duplicates(s):
     return False
 
 # Q
-def Remove_Duplicates(s):
-    _s = s
-    for i in range(0, len(s)):
-        c = s[i]
-        if Find(s, c, i + 1) != -1:
-            print(f"Found {c} in {s}")
-            Remove_Char(s, i)
-        if i >= len(s):
+def remove_duplicates(text):
+    _s = text
+    for i in range(0, len(text)):
+        if i >= len(_s):
             break
+        c = _s[i]
+        #if c == ' ':
+        #    continue
+        #print(f"[Remove_Duplicates] i: {i} c: {c} count: {_s.count(c)}")
+        for j in range(_s.count(c) - 1):
+            _s = remove_char(_s, c, i + 1)
+    return _s
 
-text = '''
-As an AdBlock user, you know firsthand the value that our software brings to your online experience.
-By blocking unwanted and intrusive ads, AdBlock helps you browse the web faster, safer, and with fewer distractions.
-But did you know that AdBlock is completely free, with no hidden fees or upgrades?
-We believe that everyone should have access to a better, ad-free internet, which is why we offer AdBlock for free to all users.
+quote = '''
+As an AdBlock user, you are the best.
+I hate ads.
 '''
 
-mirror = Get_Mirrored(text)
-print(mirror)
+# A
+mirror = get_mirrored(quote)
+print(f"Mirrored text: \"{mirror}\"")
 
-removed = Remove_Char_From_String(text, 'a')
-print(removed)
+# B
+removed = remove_char_from_string(quote, 'a')
+print(f"\nA text after removing all \'{'a'}\' : \"{removed}\"")
 
-Char_Num(text, 'e')
+# C, D
+char_num(quote, 'e')
 
-print(No_Char_Extended(text, 'a'))
+# E, F, G
+no_char(quote, 'a')
 
-word = input("Enter a word to test Avoids function: ")
-avoidStr = input("Enter a string of forbidden letters: ")
-bAvoid = Avoids(word, avoidStr)
-print(f"{word} avoids {avoidStr}, {bAvoid}")
+# H
+#word = input("Enter a word to test Avoids function: ")
+#avoidStr = input("Enter a string of forbidden letters: ")
+word = "abcd"
+avoidStr = "apoiuy"
+bAvoid = avoids(word, avoidStr)
+print(f"\n\"{word}\" avoids \"{avoidStr}\", {bAvoid}")
 
+# I
+letters = "abc"
+bUseOnly = uses_only(word, letters)
+print(f"\n\"{word}\" uses only \"{letters}\", {bUseOnly}")
+
+# J
+bUseAll = uses_all(word, letters)
+print(f"\n\"{word}\" uses all \"{letters}\", {bUseAll}")
+
+# K
+bIsAbecedarian = is_abecedarian(quote)
+print(f"\n\"{quote}\" is abecedarian, {bIsAbecedarian}")
+
+# L, M
+idx = find(quote, 'a', 3)
+print(f"\n\'{'a'}\' is found at {idx} in \"{quote}\"")
+
+# N
+bIsSorted = is_sorted(quote)
+print(f"\n\"{quote}\" is sorted, {bIsSorted}")
+
+# O
+word1 = "abc"
+word2 = "cba"
+bIsAnagram = is_anagram(word1, word2)
+print(f"\n\"{word1}\" and \"{word2}\" are anagram, {bIsAnagram}")
+
+# P
+bHasDuplicates = has_duplicates(quote)
+print(f"\n\"{quote}\" has duplicates, {bHasDuplicates}")
+
+# Q
+uniqueText = remove_duplicates(quote)
+print(f"\nDuplicates removed text: \"{uniqueText}\"")
+
+quote = "abcde"
+quote = remove_char_idx(quote, 2)
+print("\n" + quote)
+
+
+quote = '''
+I do not feel any need to do something like: 
+get_user_by_id(id) and get_user_by_name(name) 
+when I could just do get_user(id) and get_user(name) overload.
+The parameter list is there to distinguish the two, it's clear and concise.
+Without overloading you can get ridiculous unction names.
+I hope Python adds overloading in future.
+'''
+avoidText = "abcdefgzlu"
+print(find_least_forbidden_letters(quote, avoidText))
