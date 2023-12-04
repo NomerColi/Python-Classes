@@ -8,16 +8,26 @@ def contains(text, char):
 def sort(text):
     return str(''.join(sorted(text)))
 
-def remove_char_idx(text, i):
-    return text[:i] + text[i + 1:]
-
 def remove_char(text, char, startIdx):
     i = find(text, char, startIdx)
     if i != -1:
-        return remove_char_idx(text, i)
+        return text[:i] + text[i + 1:]
     else:
         return text
 
+# 1
+def get_character_num(text):
+    return len(text)
+
+# 2
+def get_last_character(text):
+    return text[len(text):]
+
+# 3
+def get_first_index(text, char):
+    return text.lower().find(char)
+
+# 4
 def get_word_num(text):
     bInSpace = text[0] == ' '
     num = 0 if bInSpace else 1
@@ -30,6 +40,7 @@ def get_word_num(text):
 
     return num
 
+# 5
 def get_first_name(text):
     firstName = ""
     for c in text:
@@ -42,6 +53,7 @@ def get_first_name(text):
 def is_vowel(char):
     return contains(vowels, char)
 
+# 6
 def get_vowel_num(text):
     num = 0
     for c in text:
@@ -50,6 +62,7 @@ def get_vowel_num(text):
 
     return num
 
+# 7
 def get_vowel_capitialized_name(text):
     capitalizedName = ""
     for c in text:
@@ -59,33 +72,53 @@ def get_vowel_capitialized_name(text):
             capitalizedName += c.lower()
     return capitalizedName
 
+# 8
+def get_centered_string(text):
+    return '+' * 10 + '~' * 10 + text + '~' * 10 + '+' * 10
+
+# 9
+def get_split_string(text):
+    length = get_character_num(text)
+    midIdx = length // 2
+    return text[:midIdx] + '*' * (70 - length) + text[midIdx:]
+
+# Part 1 main code
 #name = input("Please enter your name: ")
 name = "John Jacob Jingleheimer Schmidt"
 
-length = len(name)
+# 1
+length = get_character_num(name)
 print(f"\nYour name is {length} characters long.")
 
-lastChar = name[len(name):]
+# 2
+lastChar = get_last_character(name)
 print(f"\nThe last character is: {lastChar}")
 
-firstEIndex = name.lower().find('e')
+# 3
+firstEIndex = get_first_index(name, 'e')
 print(f"\nThe first \'e\' is at position {firstEIndex}.")
 
+# 4
 numOfWords = get_word_num(name)
 print(f"\nYour name has {numOfWords} words.")
 
+# 5
 firstName = get_first_name(name)
 print(f"\nYour first name is {firstName}.")
 
+# 6
 numOfVowels = get_vowel_num(name)
 print(f"\nYour name contains {numOfVowels} vowels.")
 
+# 7
 vowel_capitalized_name = get_vowel_capitialized_name(name)
 print(f"\nYour name with uppercase vowels is: {vowel_capitalized_name}")
 
-centeredName = '+' * 10 + '~' * 10 + name + '~' * 10 + '+' * 10
+# 8
+centeredName = get_centered_string(name)
 print(f"\n{centeredName}")
 
+# 9
 midIdx = length // 2
 splitName = name[:midIdx] + '*' * (70 - length) + name[midIdx:]
 print(f"\n{splitName}")
@@ -232,6 +265,8 @@ def remove_duplicates(text):
             _s = remove_char(_s, c, i + 1)
     return _s
 
+
+# Part 2 main code
 quote = '''
 As an AdBlock user, you are the best.
 I hate ads.
@@ -293,10 +328,6 @@ print(f"\n\"{quote}\" has duplicates, {bHasDuplicates}")
 # Q
 uniqueText = remove_duplicates(quote)
 print(f"\nDuplicates removed text: \"{uniqueText}\"")
-
-quote = "abcde"
-quote = remove_char_idx(quote, 2)
-print("\n" + quote)
 
 
 quote = '''
