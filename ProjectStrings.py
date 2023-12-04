@@ -83,45 +83,50 @@ def get_split_string(text):
     return text[:midIdx] + '*' * (70 - length) + text[midIdx:]
 
 # Part 1 main code
-#name = input("Please enter your name: ")
-name = "John Jacob Jingleheimer Schmidt"
+while True:
+    name = input("Please enter your name, enter quit if you want to quit: ")
+    
+    if name.lower() == "quit":
+        break
 
-# 1
-length = get_character_num(name)
-print(f"\nYour name is {length} characters long.")
+    name = "John Jacob Jingleheimer Schmidt"
 
-# 2
-lastChar = get_last_character(name)
-print(f"\nThe last character is: {lastChar}")
+    # 1
+    length = get_character_num(name)
+    print(f"\nYour name is {length} characters long.")
 
-# 3
-firstEIndex = get_first_index(name, 'e')
-print(f"\nThe first \'e\' is at position {firstEIndex}.")
+    # 2
+    lastChar = get_last_character(name)
+    print(f"\nThe last character is: {lastChar}")
 
-# 4
-numOfWords = get_word_num(name)
-print(f"\nYour name has {numOfWords} words.")
+    # 3
+    firstEIndex = get_first_index(name, 'e')
+    print(f"\nThe first \'e\' is at position {firstEIndex}.")
 
-# 5
-firstName = get_first_name(name)
-print(f"\nYour first name is {firstName}.")
+    # 4
+    numOfWords = get_word_num(name)
+    print(f"\nYour name has {numOfWords} words.")
 
-# 6
-numOfVowels = get_vowel_num(name)
-print(f"\nYour name contains {numOfVowels} vowels.")
+    # 5
+    firstName = get_first_name(name)
+    print(f"\nYour first name is {firstName}.")
 
-# 7
-vowel_capitalized_name = get_vowel_capitialized_name(name)
-print(f"\nYour name with uppercase vowels is: {vowel_capitalized_name}")
+    # 6
+    numOfVowels = get_vowel_num(name)
+    print(f"\nYour name contains {numOfVowels} vowels.")
 
-# 8
-centeredName = get_centered_string(name)
-print(f"\n{centeredName}")
+    # 7
+    vowel_capitalized_name = get_vowel_capitialized_name(name)
+    print(f"\nYour name with uppercase vowels is: {vowel_capitalized_name}")
 
-# 9
-midIdx = length // 2
-splitName = name[:midIdx] + '*' * (70 - length) + name[midIdx:]
-print(f"\n{splitName}")
+    # 8
+    centeredName = get_centered_string(name)
+    print(f"\n{centeredName}")
+
+    # 9
+    midIdx = length // 2
+    splitName = name[:midIdx] + '*' * (70 - length) + name[midIdx:]
+    print(f"\n{splitName}")
 
 
 ## Part 2
