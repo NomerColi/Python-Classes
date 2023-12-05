@@ -27,7 +27,7 @@ def get_character_num(text):
 # 2
 # returns the last character in 'text'
 def get_last_character(text):
-    return text[len(text):]
+    return text[len(text) - 1:]
 
 # 3
 # returns the first index of 'char' in 'text'
@@ -104,8 +104,6 @@ while True:
     
     if name.lower() == "quit":
         break
-
-    name = "John Jacob Jingleheimer Schmidt"
 
     # 1
     length = get_character_num(name)
@@ -294,7 +292,7 @@ def has_duplicates(text):
     return False
 
 # Q
-# return 'text' after removing leaving only unique characters
+# return 'text' after leaving only unique characters
 def remove_duplicates(text):
     _s = text
     for i in range(0, len(text)):
