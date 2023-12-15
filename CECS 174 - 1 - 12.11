@@ -1,0 +1,12 @@
+class BanckAccount:
+    
+    def __init__(self, account_number: str, owner: str, balance: float, annual_interest: float):
+        self.account_number = account_number
+        self.owner = owner
+        self.balance = balance
+        self.annual_interest = annual_interest
+
+    def add_interest(self):
+        self.balance += self.balance * self.annual_interest
+        
+
