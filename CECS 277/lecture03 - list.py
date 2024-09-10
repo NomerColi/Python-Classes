@@ -36,6 +36,7 @@ def func(list):
 
 def main():
     evens = [2, 4, 6, 8, 10]
+    print(evens[1:4])
 
     # Enumerate
     for count, val in enumerate(evens):
