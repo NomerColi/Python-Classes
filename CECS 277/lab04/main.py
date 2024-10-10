@@ -27,7 +27,7 @@ def read_map():
 def display_map(map, player):
     """Passes in the map and the user's location.
     Args:
-        map:
+        map: 2d array of the map for the player
         player: an integer array that has x and y component for the player's position.
     Returns:
         none
@@ -102,26 +102,29 @@ def main():
     player = [0, 0] # 1D list that initializes user's location at the top left corner (0, 0).
     upper_bound = 6 # Sets the maximum boundary for the map.
 
-    #initialize trap and treasure counters
-    treasure_count = 0 
-    trap_count = 0 
+    # initialize trap and treasure counters
+    treasure_count = 0
+    trap_count = 0
 
     print("Treasure Hunt!")
     print("Find the 7 treasures without getting\ncaught in a trap. Look around to spot\nnearby traps and treasures.")
-    #loop used here
+    # loop used here
+    # result: 0:ongoing, 1:player won, -1:player lost
     result = 0
-    while result == 0: #changes from is to ==
+    while result == 0:
         display_map(user_map2d, player)
         user_input = input("Enter Direction: (WASD or L to look around\nor Q to quit): ").upper()
-        if len(user_input) != 1 or user_input not in "WASDLQ": #checks for invalid inputs
+        if len(user_input) != 1 or user_input not in "WASDLQ": # checks for invalid inputs
             print("Invalid input.")
         elif user_input in "WASD":
             move_player(player, user_input, upper_bound)
+            # checks what the player is standing on
             s = solution_map[player[0]][player[1]]
             user_map2d[player[0]][player[1]] = s
             if s == 'T': 
                 print("You found treasure!")
                 treasure_count += 1
+                # when the player collects less than 7 treasures
                 if treasure_count < 7:
                     print("There are " + str(7 - treasure_count) + " treasures remaining.")
                 else:
@@ -130,11 +133,11 @@ def main():
                 print("You were caught in a trap!")
                 result = -1
         elif user_input == "L":
-            #calls for hint
-            #print("User entered L")
+            # calls for hint
             treasure_count, trap_count = count_treasures_traps(solution_map, player, upper_bound)
             print("You detect " + str(treasure_count) + " treasures nearby.")
             print("You detect " + str(trap_count) + " traps nearby.")
+            # 
             user_map2d[player[0]][player[1]] = str(trap_count)
         elif user_input == 'Q':
             exit()
@@ -146,6 +149,6 @@ def main():
         print("You won!")
     elif result == -1:
         print("Game Over!")
-            
-            
+
+
 main()
