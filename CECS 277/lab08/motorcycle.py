@@ -4,33 +4,34 @@ Written by: Omar Juarez, Yunjae Cho
 Date: Fall 2024
 
 """
+
 from vehicle import Vehicle
 import random
+
+
 class Motorcycle(Vehicle):
     def __init__(self) -> None:
         """Calls the superclass's init with values for name
         ('Swift Bike'), initial ('M'), min_speed (6), and max_speed(8)
         Args:
-            self
+            self (Motorcycle)
         Return:
-            none"""
+            none
+        """
         super().__init__(name = 'Swift Bike', initial = 'M', min_speed = 6, max_speed = 8)
 
     def slow(self, dist):
-        """- overridden method - passes in distance to the next obstacle
-        (if there is one). The motorcycle will move at 75% speed, rather than half.
-        If there's an obstacle then it will go around it. There is no energy cost.
-        Return a string that describes the event that occurred with the name of the
-        motorcycle and the distance traveled (if applicable).
+        """Slows down the Motorcycle to 75%
         Args:
-            self
-            dist
+            self (Motorcycle)
+            dist (int): the distance to the next obstacle
         Returns:
             a string that describes the event that occurred with the name of the
-            motorcycle and the distance traveled (if applicable)
+            Motorcycle and the distance traveled (if applicable)
         """
-        speed = random.randrange(int(self._min_speed * .75), int(self._max_speed * .75)) # needs to be changed
+        speed = random.randint(int(self._min_speed * .75), int(self._max_speed * .75)) # needs to be changed
 
+        # if the Motorcycle goes around an obstacle
         went_around = False
         if speed >= dist:
             went_around = True
@@ -47,41 +48,47 @@ class Motorcycle(Vehicle):
             
         return return_str
     def description_string(self):
-        """Returns a string with the motorcycle's stats and abilities
+        """Returns a string with the Motorcycle's stats and abilities
         Args:
-            self
+            self (Motorcycle)
         Returns:
-            a string with the motorcycle's stats and abilities
+            a string with the Motorcycle's stats and abilities
         """
-        return f"{self._name} - a speedy motorcycle ({self._min_speed}-{self._max_speed} units). Special: Wheelie (2x speed but there's a chance you'll crash)." # needs to be changed
+        return f"{self._name} - a speedy Motorcycle ({self._min_speed}-{self._max_speed} units). Special: Wheelie (2x speed but there's a chance you'll crash)." # needs to be changed
     def special_move(self, dist):
-        """passes in distance to the next obstacle (if there is one). If there is
-        sufficient energy (>= 15), deduct 15 energy, then there is a 75% chance that
-        the motorcycle will move at 2x speed, otherwise it will crash and only move one
-        space forward. If it was successful but there was obstacle, then it will crash and stops in
-        the space just before it, otherwise it moves a randomized distance. Return a string that
-        describes the event that occured with the name of the motorcycle and the distance
-        traveled (if applicable).
+        """Moves the Motorcycle with 2x speed using 15 energy.
+        However, the Motorcycle could fall over by 25%
         Args:
-            self
-            dist
+            self (Motorcycle)
+            dist (int): the distance to the next obstacle
         Returns:
             a string that describes the event that occurred with the name of the
-            motorcycle and the distance traveled (if applicable)
+            Motorcycle and the distance traveled (if applicable)
         """
         if self.energy >= 15:
             self._energy -= 15
+
             chance = random.randint(0, 3)
+            # if the Motorcycle falls over
             if chance == 0:
                 speed = 1
                 return f"{self._name} pops a wheelie and falls over!"
+            # if the Motorcycle speeds up well
             else:
-                speed = random.randint(self._min_speed, self._max_speed) * 2 # needs to be changed
-            if speed < dist:
-                self.position += int(speed)
-                return f"{self._name} pops a wheelie and moves {int(speed)} units!"
-            else:
-                self.position = dist - 1
+                speed = random.randint(self._min_speed * 2, self._max_speed * 2)
+
+            # if the Motorcycle crashes into an obstacle
+            crashed = False
+            if speed >= dist:
+                crashed = True
+                # moves the Motorcycle right up to the obstacle
+                speed = dist - 1
+
+            self._position += speed
+
+            if crashed:
                 return f"{self._name} CRASHES into an obstacle."
+            else:
+                return f"{self._name} pops a wheelie and moves {speed} units!"
         else:
             return f"{self._name} doesn't have sufficient energy."

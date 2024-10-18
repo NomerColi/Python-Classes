@@ -24,8 +24,8 @@ class Vehicle(abc.ABC):
         Args:
             self (Vehicle) - the Vehicle instance being initiated
             initial (str): an initial for this vehicle
-            min_speed (str): the minimum speed for this vehicle
-            max_speed (str): the maximum speed for this vehicle
+            min_speed (str): the minimum speed for this Vehicle
+            max_speed (str): the maximum speed for this Vehicle
         Returns:
             none
         """
@@ -38,9 +38,9 @@ class Vehicle(abc.ABC):
         self._energy = 100
 
     def fast(self, dist) -> str:
-        """Speeds up the Vehicle
+        """Speeds up the Vehicle.
         Args:
-            self (Vehicle)
+            self (Vehicle) - the Vehicle instance to speed up
             dist (int): the distance to the next obstacle
         Returns:
             a string of the movement result
@@ -48,11 +48,13 @@ class Vehicle(abc.ABC):
         if self._energy >= 5:
             self._energy -= 5
 
-            speed = random.randrange(self._min_speed, self._max_speed)
+            speed = random.randint(self._min_speed, self._max_speed)
 
             crashed = False
+            # if the Vehicle crashes into an obstacle
             if speed >= dist:
                 crashed = True
+                # moves right up to the obstacle
                 speed = dist - 1
             
             self._position += speed
@@ -64,17 +66,20 @@ class Vehicle(abc.ABC):
                 return_str += " quickly moves " + str(speed)
 
             return return_str
+        else:
+            return f"{self._name} doesn't have sufficient energy."
         
     def slow(self, dist) -> str:
         """Slows down the Vehicle
         Args:
-            self (Vehicle)
+            self (Vehicle) - the Vehicle instance to slow down
             dist (int): the distance to the next obstacle
         Returns:
             a string of the movement result
         """
-        speed = random.randrange(self._min_speed // 2, self._max_speed // 2) # needs to be changed
+        speed = random.randint(self._min_speed // 2, self._max_speed // 2)
 
+        # if the Vehicle goes around an obstacle
         went_around = False
         if speed >= dist:
             went_around = True
@@ -92,7 +97,13 @@ class Vehicle(abc.ABC):
         return return_str
     
     def __str__(self) -> str:
-        return self._name + "[Position - " + str(self._position) + ", Energy - " + str(self._energy) + "]"
+        """Returns the representation of this Vehicle
+        Args:
+            self (Vehicle) - the Vehicle instance to get string representation of
+        Returns:
+            a string representing the Vehicle
+        """
+        return self._name + " [Position - " + str(self._position) + ", Energy - " + str(self._energy) + "]"
 
     @property
     def initial(self):
@@ -110,7 +121,7 @@ class Vehicle(abc.ABC):
     def description_string(self):
         """Returns a string with the vehicle's stats and abilities
         Args:
-            self
+            self (Vehicle) - the Vehicle instance to get description of
         Returns:
             a string with the vehicle's stats and abilities
         """
@@ -120,8 +131,8 @@ class Vehicle(abc.ABC):
     def special_move(self, dist):
         """Vehicle's special move
         Args:
-            self
-            dist
+            self (Vehicle) - the Vehicle instance to use the special move
+            dist (int): the distance to the next obstacle
         Returns:
             a string that describes the event that occured with the name of
             the vehicle and the distance traveled (if applicable)"""
