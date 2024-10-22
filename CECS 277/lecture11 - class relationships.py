@@ -9,7 +9,7 @@ Class Relationships Types
     attribute, the instance of class B is not constructed in class A
 - Composition: class A 'owns' an instance of class B // A <|>---- B (solid arrow and solid diamond)
     attribute, constructed in the class
-- Inheritance: class B 'is a' instance of class A // A <---- B (solid arrow)
+- Inheritance: class B 'is a' instance of class A // A <|---- B (solid arrow)
     Class B is derived from class A
 
 """
