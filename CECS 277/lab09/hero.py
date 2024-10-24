@@ -21,7 +21,7 @@ class Hero(Entity):
         """
         dmg = random.randint(1, 6) + random.randint(1, 6) # 2D6
         opponent.take_damage(dmg)
-        return f"{self.name} slashes the {opponent} with their sword for {dmg} damage!"
+        return f"{self.name} slashes the {opponent.name} with their sword for {dmg} damage!"
     def special_attack(self, opponent):
         """The dragon takes a random amount of damage in the range 1D12
         (1-12).
@@ -34,4 +34,4 @@ class Hero(Entity):
         """
         dmg = random.randint(1, 12) # 1D12
         opponent.take_damage(dmg)
-        return f"{self.name} hits the {opponent} with an arrow for {dmg} damage!"
+        return f"{self.name} hits the {opponent.name} with an arrow for {dmg} damage!"

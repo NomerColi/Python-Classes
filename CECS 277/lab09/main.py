@@ -1,4 +1,9 @@
+""" Dragon Trainer Game
 
+Written by: Omar Juarez, Yunjae Cho
+Date: Fall 2024
+
+"""
 
 from check_input import get_int_range
 from random import randint
@@ -25,7 +30,7 @@ def main():
         # Displays a description of the dragons with their hp and special moves remaining
         for i in range(len(dragons)):
             print(f"{i + 1}. {dragons[i]}")
-        dragon_to_attack = dragons[get_int_range("Choose a dragon to attack: ", 1, 3) - 1] # User chooses which dragon to attack
+        dragon_to_attack = dragons[get_int_range("Choose a dragon to attack: ", 1, len(dragons)) - 1] # User chooses which dragon to attack
 
         print()
 
@@ -46,12 +51,13 @@ def main():
             if len(dragons) == 0: # If the user has defeated all the dragons, it displays a victory message
                 print("Congratulations! You have defeated all three dragons, you have passed the trials.")
                 end = True
+                break
         
         attacking_dragon = dragons[randint(0, len(dragons) - 1)] # randomly selects a random (surviving) dragon to attack the hero
         dragon_move = randint(0, 1) # randomly chooses what attack the dragon attacks the hero with
 
         combat_str = ""
-        if dragon_move == 1: # dragon does basic attack
+        if dragon_move == 0: # dragon does basic attack
             combat_str += attacking_dragon.basic_attack(hero)
         else: # dragon does special attack
             combat_str += attacking_dragon.special_attack(hero)
