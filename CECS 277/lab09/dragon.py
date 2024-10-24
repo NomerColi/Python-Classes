@@ -30,7 +30,7 @@ class Dragon(Entity):
     def decrement_special_attacks(self) -> None:
         """Decrements the remaining number of special attacks the Dragon can perform.
         Args:
-            self (Dragon) - the Dragon instance decrementing
+            self (Dragon) - the Dragon instance decrementing special attacks
         Returns:
             none
         """
@@ -41,8 +41,8 @@ class Dragon(Entity):
     def basic_attack(self, opponent) -> str:
         """- Tail attack - The hero takes a random amount of damage in the range 3 - 7.
         Args:
-            self
-            opponent
+            self (Dragon) - the Dragon instance attacking
+            opponent (Hero) - the Hero instance being attacked
         Returns:
             a string with the description of the attack and the damage dealt to the hero.
         """

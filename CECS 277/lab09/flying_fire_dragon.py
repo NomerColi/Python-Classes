@@ -12,15 +12,17 @@ from random import randint
 
 
 class FlyingFireDragon(Dragon, Flying, Fire):
+    """Represents a FlyingFireDragon.
+    """
     def __init__(self) -> None:
         super().__init__(name = "Deadly Nadder", max_hp = 20, num_sp = 2)
     def special_attack(self, opponent) -> str:
         """randomly choose one of the four flying and fire attacks.
         Args:
-            self
-            opponent
+            self (FlyingFireDragon) - the FireDragon instance attacking
+            opponent (Hero) - the Hero instance being attacked
         Returns:
-            none
+            a string for the result of attack
         """
         rand = randint(0, 3)
         if rand == 0:

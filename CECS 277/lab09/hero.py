@@ -4,8 +4,11 @@ Written by: Omar Juarez, Yunjae Cho
 Date: Fall 2024
 
 """
+
 from entity import Entity
 import random
+
+
 class Hero(Entity):
     def basic_attack(self, opponent):
         """The dragon takes a random amount of damage in the range 2D6 (1 - 6 + 1 - 6).

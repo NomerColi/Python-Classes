@@ -34,11 +34,11 @@ class Entity(abc.ABC):
     def hp(self):
         return self._hp
     
-    def take_damage(self, dmg):
+    def take_damage(self, dmg) -> None:
         """Takes damage.
         Args:
             self (Entity) - the Entity instance taking damage
-            dmg (int) - the amount of damage
+            dmg (int): the amount of damage
         Returns:
             none
         """
