@@ -2,6 +2,7 @@
 
 Classes & Objects
 
+Class
 - a programmer defined data type
 - represents an object
 - code reuse
@@ -13,6 +14,14 @@ Classes & Objects
 4. Extension and Reuse - one a class is created and tested, in can be reused in other programs or derived from to create new classes
 
 Object - an instance of a class
+
+Self - represents the instance of the class
+
+Object References - point1. does not contain the actual data of the object
+Shallow Copy
+- point3 = point1
+Deep Copy
+point3 = copy.deepcopy(point1)
 
 
 """
@@ -39,8 +48,27 @@ class Point:
         """Returns the Point as a formmated string."""
         return "X = " + str(self.x) + " Y = " + str(self.y)
 
+import copy
+
+
+def movePoint(pt):
+    pt.translate(1, 1)
+    print(pt)
+
+
+def newPoint():
+    return Point()
+
 def main():
-    pass
+
+    p1 = Point(1, 2)
+    p1.translate(2, 3)
+    print(p1)
+
+    p2 = copy.deepcopy(p1)
+    p2.translate(1, 1)
+    print(p1)
+    print(p2)
 
 
 main()

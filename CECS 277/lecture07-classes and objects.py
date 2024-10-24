@@ -1,7 +1,6 @@
 """
 
-Classes
-Objects
+Classes & Objects
 
 Design
 1. Summarize program
@@ -10,13 +9,46 @@ Design
 4. attributes methods
 5. Write code
 
-Class Design - 
+Class Design - start with basic set of steps and then expand as needed
 1. Write a full description of what you want your program to do
-2. Lookk through your description, usually items that are nouns or objects will become the classes
+2. Look through your description, usually items that are nouns or objects will become the classes
 3. Make a list of the classes you decide to create
 4. Expand on your class as needed
 
 Operator Overloading
+add the ability for our objects to be used with operators
+
+Relational Operators
+- lt
+- le
+- gt
+- ge
+- eq
+- ne
+
+Mathematical Operators
+- add
+- sub
+- mul
+- truediv
+- floordiv
+- mod
+- pow
+
+Bitwise Operators
+- and
+- or
+- xor
+- lshift
+- rshift
+
+Other Operators
+- getitem
+- len
+- int
+- float
+- str
+- repr
 
 
 """

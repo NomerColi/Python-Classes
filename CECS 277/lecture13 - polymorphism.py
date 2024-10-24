@@ -12,6 +12,7 @@ if the object has the methods that are needed, then it can be used without check
 
 Method Overriding
 when a method in a subclass has the same name as a method in the superclass
+guaranteed to have the overriden function
 
 Object Class
 a class from which all classes automatically inherit

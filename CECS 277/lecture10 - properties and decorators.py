@@ -9,7 +9,16 @@ Access Control - public vs non-public
 - Protected: self._x
 - Public: self.x
 
+property()
+radius = property(_get_radius, _set_radius)
+
 Decorators - a cleaner version of property() placing @
+@property
+def radius(self):
+@radius.setter
+def radius(self, r):
+
+<<get, set>>
 
 """
 

@@ -2,8 +2,11 @@
 
 Inheritance
 you create a new class that is derived from an existing class
+subclasses are easy to write
+no need to write similar functions for each of the different types of classes
+easy to modify
 
----> (solid line and hollow arrow)
+superclass <|--- subclass (solid line and hollow arrow)
 
 Overriding
 any methods in a subclass that have the same name as in the superclass

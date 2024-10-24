@@ -3,6 +3,7 @@
 Interfaces & Mixins
 
 Interfaces
+subclass ---|> interface
 specity additional behaviors or abilities for an implementing class
 An abstract class that contains all abstract methods that all implementing classes will be then forced to override
 When not all of your subclasses will require the added behavior, but some will have that code in common

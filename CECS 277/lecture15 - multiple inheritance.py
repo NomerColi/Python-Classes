@@ -11,7 +11,7 @@ and then another class inherits from the first two classes using multiple inheri
 
 Method Resolution Order (MRO)
 the order that a method is searched for in the hierarchy of classes when it gets called
-
+__mro__
 
 """
 
