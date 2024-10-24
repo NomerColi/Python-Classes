@@ -32,9 +32,7 @@ class Flying:
         return return_str
     
     def windblast(self: Dragon, opponent: Hero):
-        """if the dragon has any special attacks left, then it blasts wind at
-        the hero and they take a random amount of damage in the range 3-7 and 
-        the number of special attacks is decremented.
+        """Performs a windblast to the Hero.
         Args:
             self (Dragon) - the attacking Dragon instance
             opponent (Hero) - the Hero instance being attacked

@@ -39,9 +39,7 @@ class Fire:
         return return_str
 
     def fireball(self: Dragon, opponent: Hero):
-        """if the dragon has any special attacks left, then it spits a fireball at
-        the hero and they take a random amount of damage in the range 4-8 and 
-        the number of special attacks is decremented.
+        """Performs a fireball to the Hero.
         Args:
             self (Dragon) - the attacking Dragon instance
             opponent (Hero) - the Hero instance being attacked
