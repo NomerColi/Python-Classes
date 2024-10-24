@@ -19,7 +19,7 @@ class Hero(Entity):
             a string with the description of the attack and the damage dealt
             to the dragon.
         """
-        dmg = random.randint(1, 6) + random.randint(1, 6)
+        dmg = random.randint(1, 6) + random.randint(1, 6) # 2D6
         opponent.take_damage(dmg)
         return f"{self.name} slashes the {opponent} with their sword for {dmg} damage!"
     def special_attack(self, opponent):
@@ -32,6 +32,6 @@ class Hero(Entity):
             a string with the description of the attack and the damage dealt
             to the dragon.
         """
-        dmg = random.randint(1, 12)
+        dmg = random.randint(1, 12) # 1D12
         opponent.take_damage(dmg)
         return f"{self.name} hits the {opponent} with an arrow for {dmg} damage!"

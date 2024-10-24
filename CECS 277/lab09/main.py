@@ -10,7 +10,7 @@ from flying_fire_dragon import FlyingFireDragon
 
 
 def main():
-    hero_name = input("What is your name, challenger?\n")
+    hero_name = input("What is your name, challenger?\n") # asks the user to input a name for their hero
 
     print("\nWelcome to dragon training, " + hero_name)
     print("You must defeat 3 dragons.\n")
@@ -41,9 +41,9 @@ def main():
             combat_str += hero.special_attack(dragon_to_attack) # attacks dragon with Arrow
         print(combat_str)
         
-        if dragon_to_attack.hp == 0:
+        if dragon_to_attack.hp == 0: # If a dragon's HP hits 0, it removes it from the game
             dragons.remove(dragon_to_attack)
-            if len(dragons) == 0:
+            if len(dragons) == 0: # If the user has defeated all the dragons, it displays a victory message
                 print("Congratulations! You have defeated all three dragons, you have passed the trials.")
                 end = True
         
@@ -59,7 +59,7 @@ def main():
 
         print()
 
-        if hero.hp == 0:
+        if hero.hp == 0: # If player's HP hits 0, it causes the game to be over
             print("Game Over")
             end = True
 
