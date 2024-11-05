@@ -27,6 +27,10 @@ class Dragon(Entity):
         super().__init__(name, max_hp)
         self._special_attacks = num_sp
 
+    @property
+    def special_attacks(self):
+        return self._special_attacks
+
     def decrement_special_attacks(self) -> None:
         """Decrements the remaining number of special attacks the Dragon can perform.
         Args:
@@ -46,9 +50,18 @@ class Dragon(Entity):
         Returns:
             a string with the description of the attack and the damage dealt to the hero.
         """
-        dmg = random.randint(3, 7)
-        opponent.take_damage(dmg)
-        return f"{self.name} smashes you with its tail for {dmg} damage!"
+        pass
+    
+    @abc.abstractmethod
+    def special_attack(self, opponent) -> str:
+        """Performs special attack to the Opponent.
+        Args:
+            self (Entity) - the attacking Entity instance
+            opponent (Entity) - the opponent Entity instance being attacked
+        Returns:
+            a string for the result
+        """
+        pass
 
     def __str__(self) -> str:
         """Gets the string representation of this Dragon.
