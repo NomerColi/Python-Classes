@@ -29,7 +29,7 @@ class ComboDoor(door.Door):
         return "A door with a combination lock. You can spin the dial to a number 1- 10."
 
     def menu_options(self) -> str:
-        return "Enter # 1-10: "
+        return "Enter a number 1-10: "
 
     def get_menu_max(self) -> int:
         return 10
@@ -43,9 +43,9 @@ class ComboDoor(door.Door):
         return self._solution == self._input
 
     def clue(self) -> str:
-        return_str = "Try a lower value"
+        return_str = "Try a lower value."
         if self._solution > self._input:
-            return_str = "Try a higher value"
+            return_str = "Try a higher value."
 
         return return_str
 

@@ -4,11 +4,14 @@ Written by: Omar Juarez, Yunjae Cho
 Date: Fall 2024
 
 """
+
 import door_factory
 import random
 import combo_door
 import deadbolt_door
 import code_door
+
+
 class DifficultDoorFactory(door_factory.DoorFactory):
     """Randomly selects an easy door
     """

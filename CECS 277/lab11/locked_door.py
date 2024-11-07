@@ -4,6 +4,7 @@ Written by: Omar Juarez, Yunjae Cho
 Date: Fall 2024
 
 """
+
 import random
 import door
 
