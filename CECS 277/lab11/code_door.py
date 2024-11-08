@@ -60,6 +60,12 @@ class CodeDoor(door.Door):
         return self._solution == self._input
 
     def clue(self) -> str:
+        """Displays clue for the user.
+        Args:
+            self
+        Returns:
+            Description string describing the hint.
+        """
         corrent_num = 0
         corrections = []
         for i in range(3):

@@ -14,5 +14,9 @@ class DoorFactory(abc.ABC):
     @abc.abstractmethod
     def create_door(self):
         """Creates a door
+        Args:
+            self
+        Returns:
+            An easy or difficult door
         """
         pass

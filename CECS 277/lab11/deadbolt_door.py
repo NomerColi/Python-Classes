@@ -9,11 +9,20 @@ import door
 
 
 class DeadboltDoor(door.Door):
-    """Represents a locked door that the user needs to find a key to unlock.
+    """Represents a deadbolt door that the user needs toggle the keys to unlock.
+    Attributes:
+        _bolt1 (bool): represents if first bolt is locked or unlocked
+        _bolt2 (bool): represents if second bolt is locked or unlocked
     """
     def __init__(self) -> None:
-        self._bolt1 = bool(random.getrandbits(1))
-        self._bolt2 = bool(random.getrandbits(1))
+        """Initiates whether the bolts are locked or unlocked.
+        Args:
+            self (DeadboltDoor)
+        Returns:
+            none
+        """
+        self._bolt1 = random.randint(0, 1)
+        self._bolt2 = random.randint(0, 1)
 
     def examine_door(self) -> str:
         return "A double deadbolt door. Both need to be unlocked to open the door, but you can't tell by looking at them if they're locked or unlocked."
@@ -25,18 +34,26 @@ class DeadboltDoor(door.Door):
         return 2
 
     def attempt(self, option) -> str:
-        self._input = option
-        result_str = "You toggle the first bolt."
-        if option == 2:
+        if option == 1:
+            self._bolt1 = 1 - self._bolt1
+            result_str = "You toggle the first bolt."
+        else:
+            self._bolt2 = 1 - self._bolt2
             result_str = "You toggle the second bolt."
         return result_str
 
     def is_unlocked(self) -> bool:
-        return self._bolt1 and self._bolt2
+        return self._bolt1 == 1 and self._bolt2 == 1
     
-    def clue(self) -> str: # needs to be checked for correctness
+    def clue(self) -> str:
+        """Displays clue for the user.
+        Args:
+            self
+        Returns:
+            Description string describing the hint.
+        """
         result_str = "You jiggle the door..."
-        if self._bolt1 or self._bolt2:
+        if self._bolt1 == 1 or self._bolt2 == 1:
             return result_str + " it seems like one of the bolts is unlocked."
         else:
             return result_str + " it seems like it's completely locked."

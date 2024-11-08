@@ -7,7 +7,6 @@ Date: Fall 2024
 
 import check_input
 import door
-import basic_door
 import easy_door_factory
 import difficult_door_factory
 
@@ -43,8 +42,7 @@ def main():
     # the user has to open 3 doors
     for i in range(3):
         print()
-        #door = fact.create_door()
-        door = basic_door.BasicDoor()
+        door = fact.create_door()
         open_door(door)
 
     print("\nCongratulations! You escaped...this time.")

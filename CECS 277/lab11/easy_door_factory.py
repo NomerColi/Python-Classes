@@ -13,14 +13,14 @@ import combo_door
 
 
 class EasyDoorFactory(door_factory.DoorFactory):
-    """Randomly selects an easy door
+    """Randomly creates an easy door.
     """
     def create_door(self):
         """Randomly chooses and returns an easy door
         Args:
             self
         Returns:
-            an easy door
+            a Door instance randomly chosen among easy ones
         """
         door = random.randint(1, 3)
         if door == 1:

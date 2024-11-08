@@ -47,6 +47,12 @@ class BasicDoor(door.Door):
         return self._solution == self._input
 
     def clue(self) -> str:
+        """Displays clue for the user.
+        Args:
+            self
+        Returns:
+            Description string describing the hint.
+        """
         return "Try the other way."
 
     def success(self) -> str:

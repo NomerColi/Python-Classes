@@ -13,14 +13,14 @@ import code_door
 
 
 class DifficultDoorFactory(door_factory.DoorFactory):
-    """Randomly selects an easy door
+    """Randomly creates an difficult door.
     """
     def create_door(self):
         """Randomly chooses and returns a difficult door
         Args:
             self
         Returns:
-            a difficult door
+            a Door instance randomly chosen among difficult ones
         """
         door = random.randint(1, 3)
         if door == 1:
