@@ -8,6 +8,8 @@ Date: Fall 2024
 import abc
 
 class Plate(abc.ABC):
+    """Represents a Plate.
+    """
     @abc.abstractmethod
     def description(self) -> str:
         """Returns a string description of the plate and what is on it.

@@ -9,6 +9,8 @@ import plate
 
 
 class SmallPlate(plate.Plate):
+    """Represents a Small Plate.
+    """
     def description(self) -> str:
         return "Sturdy 10 inch paper plate"
 

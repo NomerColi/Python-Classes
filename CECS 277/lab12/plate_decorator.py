@@ -10,9 +10,9 @@ from plate import Plate
 
 
 class PlateDecorator(Plate, abc.ABC):
-    """ Plate Decorator
+    """Represents a Plate Decorator.
     Attributes:
-        _plate:
+        _plate (Plate)
     """
     def __init__(self, p) -> None:
         """Passes in plate
